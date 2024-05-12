@@ -1,5 +1,6 @@
 import User from '../models/User.js'
-import bcrypt, { hash } from 'bcryptjs'
+import bcrypt from 'bcryptjs';
+const { hash } = bcrypt;
 import jwt from 'jsonwebtoken'
 
 export const register  = async (req, res) => {
@@ -70,8 +71,27 @@ export const login = async (req, res) => {
 
 export const getMe = async (req, res) => {
     try {
+        const user = await User.findById(req.userId )
         
+        if(!user) {
+            return res.json({
+                message: 'Такого пользователя не существует.'
+            })
+        }
+
+        const token = jwt.sign({
+            id: user._id,
+        }, 
+        process.env.JWT_SECRET,
+        {expiresIn: '30d'},
+    )
+
+    res.json({
+        user, 
+        token,
+    })
+
     } catch (error) {
-        
+        res.json({ message: 'Нет доступа.'})
     }
 }
