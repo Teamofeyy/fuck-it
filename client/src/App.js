@@ -11,7 +11,7 @@ import { LoginPage } from './pages/LoginPage.jsx'
 
 function App() {
   return (
-    <Layout>
+     <Layout>
       <Routes>
         <Route path='/' element={<MainPage />} />
         <Route path='posts' element={<PostsPage />} />
@@ -21,7 +21,7 @@ function App() {
         <Route path='register' element={<RegisterPage />} />
         <Route path='login' element={<LoginPage />} /> 
       </Routes>
-    </Layout>
+     </Layout>
   );
 }
 
