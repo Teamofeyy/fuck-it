@@ -42,7 +42,7 @@ export const RegisterPage = () => {
 
     <div className="flex gap-8 justify-center mt-4">
       <button type='submit' onClick={handleSubmit} className='flex justify-center items-center text-xs bg-gray-600 text-white rounded-sm py-2 px-4'>Подтвердить</button>
-      <Link to='/login' className='flex justify-center items-start text-xs text-white'>Уже есть аккаунт?</Link>
+      <Link to='/login' className='flex justify-center items-start mt-2 text-xs text-white'>Уже есть аккаунт?</Link>
     </div>
   </form>
   )
