@@ -10,23 +10,23 @@ const initialState = {
 
 export const registerUser = createAsyncThunk(
     'auth/registerUser',
-     async({username, password}, { rejectWithValue }) => {
+    async({username, password}, { rejectWithValue }) => {
         try {
             const { data } = await axios.post('/auth/register', {
                 username,
                 password,
-            })
+            });
             if(data.token) {
-                window.localStorage.setItem('token', data.token)
+                window.localStorage.setItem('token', data.token);
             }
-            return 
+            return data;
         } catch (error) {
-            // Assuming error.response.data contains the error message
-            // Adjust based on your API's error format
-            return rejectWithValue(error.response.data)
+            // Use optional chaining to safely access deeply nested properties
+            let errorMessage = error.response?.data?.message || 'An unexpected error occurred';
+            return rejectWithValue({ message: errorMessage });
         }
-     }
-)
+    }
+);
 
 export const loginUser = createAsyncThunk(
     'auth/loginUser',
@@ -76,8 +76,8 @@ export const authSlice = createSlice({
                 state.token = action.payload.token
             })
             .addCase(registerUser.rejected, (state, action) => {
-                state.status = action.payload.message
-                state.isLoading = false
+                state.status = action.payload?.message || 'Default error message';
+                state.isLoading = false;
             })
             .addCase(loginUser.pending, (state) => {
                 state.isLoading = true
