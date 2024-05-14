@@ -8,7 +8,7 @@ import authRoute from "./Routes/auth.js";
 const app = express();
 dotenv.config();
 
-const PORT = process.env.PORT || 4441
+const PORT = process.env.PORT || 3001
 const DB_USER = process.env.DB_USER
 const DB_PASSWORD = process.env.DB_PASSWORD
 const DB_NAME = process.env.DB_NAME
@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 //Routes
-// http://localhost:4444/
+// http://localhost:3001/
 app.use('/api/auth', authRoute)
 
 async function start() {
