@@ -10,7 +10,7 @@ const initialState = {
 
 export const registerUser = createAsyncThunk(
     'auth/registerUser',
-     async({username, password}) => {
+     async({username, password}, { rejectWithValue }) => {
         try {
             const { data } = await axios.post('/auth/register', {
                 username,
@@ -21,7 +21,9 @@ export const registerUser = createAsyncThunk(
             }
             return data
         } catch (error) {
-            console.log(error)
+            // Assuming error.response.data contains the error message
+            // Adjust based on your API's error format
+            return rejectWithValue(error.response.data)
         }
      }
 )
@@ -43,8 +45,13 @@ export const authSlice = createSlice({
                 state.token = action.payload.token
             })
             .addCase(registerUser.rejected, (state, action) => {
-                state.status = action.payload.message
                 state.isLoading = false
+                if (action.payload && action.payload.message) {
+                    state.status = action.payload.message
+                } else {
+                    
+                    state.status = 'Registration failed for an unknown reason'
+                }
             })
     }
 })
