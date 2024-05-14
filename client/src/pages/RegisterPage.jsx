@@ -19,7 +19,7 @@ export const RegisterPage = () => {
   }
 
   return (
-    <form onSubmit={e => e .preventDefault} className='w-1/4 h-60 mx-auto mt-40'>
+  <form onSubmit={e => e.preventDefault()} className='w-1/4 h-60 mx-auto mt-40'>
     <h1 className='text-lg text-white text-center'>Регистрация</h1>
     <label className='text-xs text-gray-400'>
       Username:
