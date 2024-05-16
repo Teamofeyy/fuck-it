@@ -30,15 +30,18 @@ export const registerUser = createAsyncThunk(
 
 export const loginUser = createAsyncThunk(
     'auth/loginUser',
-     async() => {
+    async ({ username, password }, { rejectWithValue }) => {
         try {
-            const { data } = await axios.post('/auth/login')
-            return data
+            const { data } = await axios.post('/auth/login', { username, password });
+            console.log(data);
+            return data;
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            return rejectWithValue(error.response?.data || 'An unexpected error occurred');
         }
-     }
-)
+    }
+);
+
 
 export const getMe = createAsyncThunk(
     'auth/getMe',

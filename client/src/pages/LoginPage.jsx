@@ -10,7 +10,7 @@ export const LoginPage = () => {
 
   const { status } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
-  const navigate = useNavigate
+  const navigate = useNavigate()
 
   useEffect(() => {
     if(status) {
@@ -20,6 +20,7 @@ export const LoginPage = () => {
 
   const handleSubmit = () => {
     try {
+      console.log(username, password)
       dispatch(loginUser({username, password}))
     } catch (error) {
       console.log(error)
