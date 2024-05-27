@@ -7,7 +7,7 @@ export const AddPostPage = () => {
   const [text, setText] = useState('')
   const [image, setImage] = useState('')
 
-  const dispatch = useDispatch
+  const dispatch = useDispatch()
 
   const submitHandler = () => {
     try {
