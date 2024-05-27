@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { loginUser } from '../redux/auth/features/authSlice'
+import { checkIsAuth, loginUser } from '../redux/auth/features/authSlice'
 import { toast } from 'react-toastify'
 
 export const LoginPage = () => {
@@ -9,18 +9,18 @@ export const LoginPage = () => {
   const [password, setPassword] = useState('')
 
   const { status } = useSelector((state) => state.auth)
+  const isAuth = useSelector( checkIsAuth)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(status) {
-      toast(status)
-    }
-  }, [status, navigate])
+    if(status) toast(status)
+    if(isAuth) navigate('/')
+
+  }, [status, isAuth, navigate])
 
   const handleSubmit = () => {
     try {
-      console.log(username, password)
       dispatch(loginUser({username, password}))
     } catch (error) {
       console.log(error)

@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 import authRoute from "./Routes/auth.js";
+import postRoute from "./Routes/post.js";
 
 const app = express();
 dotenv.config();
@@ -19,6 +20,7 @@ app.use(express.json());
 //Routes
 // http://localhost:3001/
 app.use('/api/auth', authRoute)
+app.use('/api/post', postRoute)
 
 async function start() {
     try {
