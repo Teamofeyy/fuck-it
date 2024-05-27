@@ -16,12 +16,12 @@ const DB_PASSWORD = process.env.DB_PASSWORD
 const DB_NAME = process.env.DB_NAME
 
 app.use(cors());
-app.use(fileUpload);
 app.use(express.json());
+app.use(fileUpload);
 app.use(express.static('uploads'))
 
 //Routes
-// http://localhost:3001/
+// http://localhost: 3001/
 app.use('/api/auth', authRoute)
 app.use('/api/post', postRoute)
 
